@@ -1,38 +1,678 @@
-.App {
+/* Booking.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* HERO SECTION */
+.hero {
+  background-size: cover;
+  background-position: center;
+  padding: 80px 20px;
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.hero h1 {
+  font-size: 3.2rem;
+  font-weight: 900;
+  margin-bottom: 18px;
 }
 
-@keyframes App-logo-spin {
+.hero p {
+  font-size: 1.25rem;
+  max-width: 650px;
+  margin: 0 auto 24px auto;
+}
+
+.hero button {
+  background-color: #2d9cdb;
+  border: none;
+  color: white;
+  font-size: 1.1rem;
+  padding: 14px 26px;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(45, 156, 219, 0.5);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  transition: background-color 0.3s ease;
+}
+
+.hero button:hover {
+  background-color: #1a7fc1;
+}
+
+/* FORM SECTION */
+.booking-form {
+  max-width: 450px;
+  margin: 45px auto 80px auto;
+  padding: 0 20px;
+}
+
+.booking-form form {
+  text-align: left;
+}
+
+.booking-form label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.booking-form input,
+.booking-form select {
+  display: block;
+  width: 100%;
+  padding: 13px 16px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 1.8px solid #ced4da;
+  margin-top: 8px;
+  margin-bottom: 18px;
+  outline-offset: 2px;
+}
+
+.booking-form p {
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: #2d9cdb;
+  text-align: center;
+  margin-top: 22px;
+}
+
+.booking-form button {
+  margin-top: 28px;
+  width: 100%;
+  background-color: #2d9cdb;
+  border: none;
+  color: white;
+  padding: 14px 0;
+  font-weight: 700;
+  font-size: 1.2rem;
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(45, 156, 219, 0.4);
+  transition: background-color 0.3s ease;
+}
+
+.booking-form button:hover {
+  background-color: #1a7fc1;
+}
+
+/* MODAL */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content input {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1.8px solid #ced4da;
+  font-size: 1rem;
+}
+
+.modal-content button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #2d9cdb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+  background-color: #1a7fc1;
+}
+
+.status-container {
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.status-heading {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.bookings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.booking-card {
+  background: #f5f5f5;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.6s ease forwards;
+  opacity: 0;
+}
+
+.cancel-button {
+  background-color: #e63946;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.cancel-button:hover {
+  background-color: #c5303d;
+}
+
+.no-bookings {
+  text-align: center;
+  color: #777;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateX(0);
   }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInHero {
+  from {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Button hover effect */
+button:hover {
+  background-color: #005fa3;
+}
+
+/* Input focus effect */
+input:focus, textarea:focus {
+  border-color: #0077cc;
+  outline: none;
+  box-shadow: 0 0 5px #0077cc;
+}
+@keyframes fadeInHero {
+  from {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+input:focus {
+  border-color: #0077cc;
+  outline: none;
+  box-shadow: 0 0 6px #0077cc;
+}
+
+button:hover {
+  background-color: #005fa3;
+}
+@keyframes fadeInHero {
+  from {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+input:focus {
+  border-color: #0077cc;
+  outline: none;
+  box-shadow: 0 0 6px #0077cc;
+}
+
+button:hover {
+  background-color: #005fa3;
+}
+/* Container and form */
+.register-container {
+  max-width: 480px;
+  margin: 0 auto 60px;
+  padding: 30px 40px;
+  background: linear-gradient(135deg, #6b8de3 0%, #a0b9f7 100%);
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 123, 255, 0.25);
+  animation: fadeInUp 0.9s ease forwards;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Form title */
+.register-form-title {
+  color: #fff;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-align: center;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Inputs */
+.register-input {
+  width: 100%;
+  padding: 14px 18px;
+  font-size: 16px;
+  margin-bottom: 22px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: inset 2px 2px 8px rgba(255, 255, 255, 0.7),
+              inset -2px -2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  color: #222;
+}
+
+.register-input::placeholder {
+  color: #888;
+  font-weight: 500;
+}
+
+.register-input:focus {
+  outline: none;
+  background: #fff;
+  box-shadow:
+    0 0 10px 2px #497af9,
+    inset 1px 1px 4px rgba(255, 255, 255, 0.9);
+  color: #222;
+}
+
+/* Submit button */
+.register-button {
+  width: 100%;
+  padding: 16px 0;
+  font-size: 20px;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #214de8 0%, #3a72f7 100%);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(33, 77, 232, 0.6);
+  transition: background 0.4s ease, box-shadow 0.3s ease;
+}
+
+.register-button:hover {
+  background: linear-gradient(135deg, #0d2fbd 0%, #2157f7 100%);
+  box-shadow: 0 10px 30px rgba(13, 47, 189, 0.8);
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .register-container {
+    padding: 25px 20px;
+    border-radius: 12px;
+  }
+  .register-form-title {
+    font-size: 28px;
+  }
+  .register-button {
+    font-size: 18px;
+    padding: 14px 0;
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Hero Section */
+.mm1 {
+  position: relative;
+  background: url('https://images.unsplash.com/photo-1624526345903-556b2598e7af?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTAyfHxjcmlja2V0fGVufDB8fDB8fHww') no-repeat center center/cover;
+  height: 320px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-bottom: 2.5rem;
+  padding: 0 1rem;
+}
+
+.mm2 {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 3rem 3.5rem;
+  border-radius: 14px;
+  text-align: center;
+  max-width: 700px;
+  width: 100%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+.mm3 {
+  font-size: 3.2rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  letter-spacing: 1.5px;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+}
+
+.mm4 {
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 0.7px;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+}
+
+/* Container */
+.mm5 {
+  max-width: 520px;
+  margin: 0 auto 3rem;
+  padding: 0 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Register Form as Table */
+.mm6 {
+  background-color: #fff;
+  padding: 2.8rem 2.5rem 2.5rem 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12);
+  transition: box-shadow 0.3s ease-in-out;
+  width: 100%;
+}
+
+.mm6:hover {
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.18);
+}
+
+/* Form title */
+.mm7 {
+  text-align: center;
+  font-size: 2.3rem;
+  margin-bottom: 2.5rem;
+  color: #222;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* Table Layout for form rows */
+.mm6 table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 1.25rem; /* vertical spacing between rows */
+  font-size: 1rem;
+}
+
+.mm6 th, 
+.mm6 td {
+  padding: 0.5rem 0;
+  vertical-align: middle;
+}
+
+/* Labels in left column */
+.mm6 th {
+  text-align: right;
+  padding-right: 1.8rem;
+  font-weight: 600;
+  color: #444;
+  width: 40%;
+  white-space: nowrap;
+}
+
+/* Inputs in right column */
+.mm6 td {
+  width: 60%;
+}
+
+/* Inputs style */
+.mm9,
+.mm11,
+.mm13,
+.mm15,
+.mm17,
+.mm19,
+.mm21,
+.mm23 {
+  width: 100%;
+  padding: 0.65rem 1.1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.mm9:focus,
+.mm11:focus,
+.mm13:focus,
+.mm15:focus,
+.mm17:focus,
+.mm19:focus,
+.mm21:focus,
+.mm23:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.45);
+}
+
+/* Button full width under table */
+.mm24 {
+  margin-top: 2.5rem;
+  padding: 1.05rem;
+  font-size: 1.2rem;
+  background: linear-gradient(135deg, #0062E6, #33AEFF);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  letter-spacing: 1px;
+  box-shadow: 0 7px 18px rgba(0, 123, 255, 0.5);
+  transition: background 0.35s ease, box-shadow 0.35s ease;
+  user-select: none;
+  width: 100%;
+}
+
+.mm24:hover {
+  background: linear-gradient(135deg, #004bb5, #2299ff);
+  box-shadow: 0 12px 30px rgba(0, 83, 191, 0.75);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .mm6 table {
+    border-spacing: 0 0.9rem;
+  }
+  .mm6 th {
+    text-align: left;
+    padding-right: 0;
+    width: auto;
+    white-space: normal;
+    padding-bottom: 0.4rem;
+  }
+  .mm6 td {
+    width: 100%;
+  }
+}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+section {
+  animation: fadeInUp 0.8s ease-out;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  padding: 30px 25px;
+  transition: transform 0.3s ease;
+}
+
+section:hover {
+  transform: translateY(-5px);
+}
+
+form label {
+  display: block;
+  margin-bottom: 18px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #333;
+}
+
+input,
+select {
+  display: block;
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  margin-top: 6px;
+  font-family: 'Poppins', sans-serif;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus,
+select:focus {
+  border-color: #2d9cdb;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(45, 156, 219, 0.1);
+}
+
+button[type="submit"] {
+  width: 100%;
+  background: #2d9cdb;
+  color: white;
+  padding: 12px 18px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  margin-top: 25px;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button[type="submit"]:hover {
+  background: #238ac4;
+  transform: scale(1.03);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+#logo_img{
+  height: 22px;
+  margin-right: 10px;
 }
