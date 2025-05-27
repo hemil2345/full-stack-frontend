@@ -192,7 +192,7 @@ const Booking = () => {
           </label>
 
           <label>Duration (hours):
-            <input type="number" name="duration" value={form.duration} onChange={handleChange} min="0.1" max="5" required style={formInputStyle} />
+            <input type="number" name="duration" value={form.duration} onChange={handleChange} min="1" max="5" required style={formInputStyle} />
           </label>
 
           <p style={{ fontWeight: '700', fontSize: '1.3rem', color: '#2d9cdb', marginTop: '22px', textAlign: 'center' }}>
