@@ -11,16 +11,12 @@ const Navbar = () => {
     window.location.href = '/login';
   };
 
+  // Bootstrap offcanvas requires a trigger ref to manually hide it after clicking a link
   const closeOffcanvas = () => {
-    const offcanvasElement = document.querySelector('.offcanvas.show');
-    const backdrop = document.querySelector('.offcanvas-backdrop');
-
-    if (offcanvasElement) {
-      const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
-      offcanvas?.hide();
-    }
-    if (backdrop) {
-      backdrop.remove();
+    const offcanvasEl = document.getElementById('mobileSidebar');
+    const bsOffcanvas = window.bootstrap?.Offcanvas.getInstance(offcanvasEl);
+    if (bsOffcanvas) {
+      bsOffcanvas.hide();
     }
   };
 
@@ -99,7 +95,9 @@ const Navbar = () => {
         aria-labelledby="mobileSidebarLabel"
       >
         <div className="offcanvas-header">
-          <h5 className="offcanvas-title" id="mobileSidebarLabel">Menu</h5>
+          <h5 className="offcanvas-title" id="mobileSidebarLabel">
+            Menu
+          </h5>
           <button
             type="button"
             className="btn-close btn-close-white"
@@ -108,46 +106,28 @@ const Navbar = () => {
           ></button>
         </div>
         <div className="offcanvas-body">
-          <nav className="d-flex flex-column">
-            {navItems.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                onClick={closeOffcanvas}
-                className={`mb-3 text-white text-decoration-none ${
-                  location.pathname === item.to ? 'fw-bold text-primary' : ''
-                }`}
-              >
-                <i className={`${item.icon} me-2`}></i>
-                {item.label}
-              </Link>
-            ))}
-          </nav>
+          {navItems.map((item) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              className="d-block mb-3 text-white text-decoration-none"
+              onClick={closeOffcanvas}  // Close offcanvas after click
+            >
+              <i className={`${item.icon} me-2`}></i>
+              {item.label}
+            </Link>
+          ))}
           <hr className="border-secondary" />
           {isLoggedIn ? (
-            <button
-              className="btn btn-outline-light w-100"
-              onClick={() => {
-                handleLogout();
-                closeOffcanvas();
-              }}
-            >
+            <button className="btn btn-outline-light w-100" onClick={() => { handleLogout(); closeOffcanvas(); }}>
               <i className="fas fa-sign-out-alt me-2"></i>Logout
             </button>
           ) : (
             <>
-              <Link
-                to="/login"
-                className="btn btn-light w-100 mb-2"
-                onClick={closeOffcanvas}
-              >
+              <Link to="/login" className="btn btn-light w-100 mb-2" onClick={closeOffcanvas}>
                 <i className="fas fa-sign-in-alt me-2"></i>Login
               </Link>
-              <Link
-                to="/register"
-                className="btn btn-outline-light w-100"
-                onClick={closeOffcanvas}
-              >
+              <Link to="/register" className="btn btn-outline-light w-100" onClick={closeOffcanvas}>
                 <i className="fas fa-user-plus me-2"></i>Register
               </Link>
             </>
