@@ -7,7 +7,7 @@ const Booking = () => {
     sport: 'cricket',
     date: '',
     start_time: '',
-    duration: .30,
+    duration: 0.30,
   });
 
   const [personalDetails, setPersonalDetails] = useState({
@@ -38,6 +38,18 @@ const Booking = () => {
   useEffect(() => {
     setPrice(form.duration * 100);
   }, [form.duration]);
+
+  useEffect(() => {
+    if (showModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [showModal]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -277,8 +289,10 @@ const modalStyles = {
     backgroundColor: 'white',
     padding: '20px',
     borderRadius: '8px',
-    maxWidth: '400px',
+    maxWidth: '500px',
     width: '90%',
+    maxHeight: '90vh',
+    overflowY: 'auto',
     boxShadow: '0 2px 10px rgba(0,0,0,0.2)',
     textAlign: 'center',
     fontFamily: "'Poppins', sans-serif",
