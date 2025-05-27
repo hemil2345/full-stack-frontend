@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../assets/logo.png';
+
 const Navbar = () => {
   const isLoggedIn = !!localStorage.getItem('access');
   const location = useLocation();
@@ -8,6 +9,19 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem('access');
     window.location.href = '/login';
+  };
+
+  const closeOffcanvas = () => {
+    const offcanvasElement = document.querySelector('.offcanvas.show');
+    const backdrop = document.querySelector('.offcanvas-backdrop');
+
+    if (offcanvasElement) {
+      const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
+      offcanvas?.hide();
+    }
+    if (backdrop) {
+      backdrop.remove();
+    }
   };
 
   const navItems = [
@@ -19,7 +33,6 @@ const Navbar = () => {
   ];
 
   return (
-
     <header className="bg-dark text-white sticky-top shadow-sm">
       <div className="container-fluid py-2">
         <div className="d-flex justify-content-between align-items-center">
@@ -52,7 +65,8 @@ const Navbar = () => {
                     location.pathname === item.to ? 'fw-bold text-primary' : ''
                   }`}
                 >
-                  <i className={`${item.icon} me-1`}></i>{item.label}
+                  <i className={`${item.icon} me-1`}></i>
+                  {item.label}
                 </Link>
               ))}
             </nav>
@@ -86,30 +100,54 @@ const Navbar = () => {
       >
         <div className="offcanvas-header">
           <h5 className="offcanvas-title" id="mobileSidebarLabel">Menu</h5>
-          <button type="button" className="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <button
+            type="button"
+            className="btn-close btn-close-white"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
         </div>
         <div className="offcanvas-body">
-          {navItems.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className="d-block mb-3 text-white text-decoration-none"
-              data-bs-dismiss="offcanvas"
-            >
-              <i className={`${item.icon} me-2`}></i>{item.label}
-            </Link>
-          ))}
+          <nav className="d-flex flex-column">
+            {navItems.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                onClick={closeOffcanvas}
+                className={`mb-3 text-white text-decoration-none ${
+                  location.pathname === item.to ? 'fw-bold text-primary' : ''
+                }`}
+              >
+                <i className={`${item.icon} me-2`}></i>
+                {item.label}
+              </Link>
+            ))}
+          </nav>
           <hr className="border-secondary" />
           {isLoggedIn ? (
-            <button className="btn btn-outline-light w-100" onClick={handleLogout}>
+            <button
+              className="btn btn-outline-light w-100"
+              onClick={() => {
+                handleLogout();
+                closeOffcanvas();
+              }}
+            >
               <i className="fas fa-sign-out-alt me-2"></i>Logout
             </button>
           ) : (
             <>
-              <Link to="/login" className="btn btn-light w-100 mb-2">
+              <Link
+                to="/login"
+                className="btn btn-light w-100 mb-2"
+                onClick={closeOffcanvas}
+              >
                 <i className="fas fa-sign-in-alt me-2"></i>Login
               </Link>
-              <Link to="/register" className="btn btn-outline-light w-100">
+              <Link
+                to="/register"
+                className="btn btn-outline-light w-100"
+                onClick={closeOffcanvas}
+              >
                 <i className="fas fa-user-plus me-2"></i>Register
               </Link>
             </>
@@ -129,7 +167,6 @@ const Navbar = () => {
       `}</style>
     </header>
   );
-  
 };
 
 export default Navbar;
