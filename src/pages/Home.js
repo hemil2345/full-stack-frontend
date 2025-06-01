@@ -71,8 +71,8 @@ const Home = () => {
         <div className="container text-center">
           <h2 className="fw-semibold mb-3">Ready to Get Started?</h2>
           <p className="mb-4 fs-5">Join the RICC family and begin your cricket journey today.</p>
-          <a href="/booking" className="btn btn-outline-light btn-lg shadow">
-            Book Your Spot
+          <a href="/login" className="btn btn-outline-light btn-lg shadow">
+            Please Login To Book Your Spot
           </a>
         </div>
       </section>
@@ -97,35 +97,77 @@ const Home = () => {
           ))}
         </div>
       </section>
-
-      {/* Newsletter Signup */}
-      <section className="py-5 bg-white border-top">
-        <div className="container text-center">
-          <h4 className="mb-3">Stay Updated</h4>
-          <p className="mb-4">Subscribe to our newsletter for training tips, match schedules, and more.</p>
-          <form
-            className="row g-2 justify-content-center"
-            onSubmit={(e) => {
-              e.preventDefault();
-              alert('Thanks for subscribing!');
-            }}
-          >
-            <div className="col-auto">
-              <input
-                type="email"
-                className="form-control form-control-lg"
-                placeholder="Enter your email"
-                required
-              />
-            </div>
-            <div className="col-auto">
-              <button type="submit" className="btn btn-success btn-lg shadow ">
-                Subscribe
-              </button>
-            </div>
-          </form>
+      <div class="container py-5">
+  <h2 class="text-center mb-5">Choose Your Plan</h2>
+  <div class="row justify-content-center g-4">
+    <div class="col-md-4">
+      <div class="card pricing-card text-center">
+        <div class="card-header py-4">
+          <h3>Plan</h3>
         </div>
-      </section>
+        <div class="card-body">
+          <p class="price">$30</p>
+          <ul class="list-unstyled mt-3 mb-4">
+            <li class="feature"><i class="fa fa-check-circle"></i>1 Hour Access</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+        <div class="col-md-4">
+      <div class="card pricing-card text-center">
+        <div class="card-header py-4">
+          <h3>Plan</h3>
+        </div>
+        <div class="card-body">
+          <p class="price">$50</p>
+          <ul class="list-unstyled mt-3 mb-4">
+            <li class="feature"><i class="fa fa-check-circle"></i>2 Hour Access</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card pricing-card text-center">
+        <div class="card-header py-4">
+          <h3>Plan</h3>
+        </div>
+        <div class="card-body">
+          <p class="price">$70</p>
+          <ul class="list-unstyled mt-3 mb-4">
+            <li class="feature"><i class="fa fa-check-circle"></i>3 Hour Access</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card pricing-card text-center">
+        <div class="card-header py-4">
+          <h3>Plan</h3>
+        </div>
+        <div class="card-body">
+          <p class="price">$90</p>
+          <ul class="list-unstyled mt-3 mb-4">
+            <li class="feature"><i class="fa fa-check-circle"></i>4 Hour Access</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+        <div class="col-md-4">
+      <div class="card pricing-card text-center">
+        <div class="card-header py-4">
+          <h3>Plan</h3>
+        </div>
+        <div class="card-body">
+          <p class="price">$110</p>
+          <ul class="list-unstyled mt-3 mb-4">
+            <li class="feature"><i class="fa fa-check-circle"></i>5 Hour Access</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>
     </main>
   );
 };

@@ -11,7 +11,6 @@ const Navbar = () => {
     window.location.href = '/login';
   };
 
-  // Bootstrap offcanvas requires a trigger ref to manually hide it after clicking a link
   const closeOffcanvas = () => {
     const offcanvasEl = document.getElementById('mobileSidebar');
     const bsOffcanvas = window.bootstrap?.Offcanvas.getInstance(offcanvasEl);
@@ -34,16 +33,17 @@ const Navbar = () => {
         <div className="d-flex justify-content-between align-items-center">
           {/* Left: Logo + Mobile Hamburger */}
           <div className="d-flex align-items-center gap-3">
-            <button
-              className="btn btn-outline-light d-md-none"
-              type="button"
-              data-bs-toggle="offcanvas"
-              data-bs-target="#mobileSidebar"
-              aria-controls="mobileSidebar"
-            >
-              <i className="fas fa-bars"></i>
-            </button>
-
+            {isLoggedIn && (
+              <button
+                className="btn btn-outline-light d-md-none"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#mobileSidebar"
+                aria-controls="mobileSidebar"
+              >
+                <i className="fas fa-bars"></i>
+              </button>
+            )}
             <Link className="navbar-brand fs-4 fw-bold text-white text-decoration-none" to="/">
               <img src={logo} alt="Logo" id="logo_img" />
               <i className="fas fa-cricket me-2"> RICC Club</i>
@@ -52,20 +52,22 @@ const Navbar = () => {
 
           {/* Right: Nav Links + Auth Buttons (Desktop only) */}
           <div className="d-none d-md-flex align-items-center gap-4">
-            <nav className="d-flex gap-3">
-              {navItems.map((item) => (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  className={`nav-link-custom text-white text-decoration-none ${
-                    location.pathname === item.to ? 'fw-bold text-primary' : ''
-                  }`}
-                >
-                  <i className={`${item.icon} me-1`}></i>
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
+            {isLoggedIn && (
+              <nav className="d-flex gap-3">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    className={`nav-link-custom text-white text-decoration-none ${
+                      location.pathname === item.to ? 'fw-bold text-primary' : ''
+                    }`}
+                  >
+                    <i className={`${item.icon} me-1`}></i>
+                    {item.label}
+                  </Link>
+                ))}
+              </nav>
+            )}
 
             <div className="d-flex gap-2">
               {isLoggedIn ? (
@@ -88,52 +90,48 @@ const Navbar = () => {
       </div>
 
       {/* Offcanvas Sidebar for Mobile */}
-      <div
-        className="offcanvas offcanvas-start bg-dark text-white"
-        tabIndex="-1"
-        id="mobileSidebar"
-        aria-labelledby="mobileSidebarLabel"
-      >
-        <div className="offcanvas-header">
-          <h5 className="offcanvas-title" id="mobileSidebarLabel">
-            Menu
-          </h5>
-          <button
-            type="button"
-            className="btn-close btn-close-white"
-            data-bs-dismiss="offcanvas"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div className="offcanvas-body">
-          {navItems.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className="d-block mb-3 text-white text-decoration-none"
-              onClick={closeOffcanvas}  // Close offcanvas after click
+      {isLoggedIn && (
+        <div
+          className="offcanvas offcanvas-start bg-dark text-white"
+          tabIndex="-1"
+          id="mobileSidebar"
+          aria-labelledby="mobileSidebarLabel"
+        >
+          <div className="offcanvas-header">
+            <h5 className="offcanvas-title" id="mobileSidebarLabel">Menu</h5>
+            <button
+              type="button"
+              className="btn-close btn-close-white"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div className="offcanvas-body">
+            {navItems.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                className="d-block mb-3 text-white text-decoration-none"
+                onClick={closeOffcanvas}
+              >
+                <i className={`${item.icon} me-2`}></i>
+                {item.label}
+              </Link>
+            ))}
+            <hr className="border-secondary" />
+            <button
+              className="btn btn-outline-light w-100"
+              onClick={() => {
+                handleLogout();
+                closeOffcanvas();
+              }}
             >
-              <i className={`${item.icon} me-2`}></i>
-              {item.label}
-            </Link>
-          ))}
-          <hr className="border-secondary" />
-          {isLoggedIn ? (
-            <button className="btn btn-outline-light w-100" onClick={() => { handleLogout(); closeOffcanvas(); }}>
               <i className="fas fa-sign-out-alt me-2"></i>Logout
             </button>
-          ) : (
-            <>
-              <Link to="/login" className="btn btn-light w-100 mb-2" onClick={closeOffcanvas}>
-                <i className="fas fa-sign-in-alt me-2"></i>Login
-              </Link>
-              <Link to="/register" className="btn btn-outline-light w-100" onClick={closeOffcanvas}>
-                <i className="fas fa-user-plus me-2"></i>Register
-              </Link>
-            </>
-          )}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Custom Style */}
       <style>{`

@@ -16,7 +16,7 @@ import Register from './pages/Register';
 function App() {
   return (
     <PayPalScriptProvider options={{
-      'client-id': 'AVLlrp-eonPMxm-T5ShSTRIgW6mt-1L73ttpgjxvm0NrLoLdvfEfqLhlnnRz7on7qiyhrg-t6FB4FnU2',
+      'client-id': 'AW5B2c7tgWHoSQamPweAif6Qko05YmeXOQhfIgoYzELKBB1H6cK5Pbky_Ipu_WHThDiiMkZOxz1JAfSX',
       currency: 'USD'
     }}>
       <BrowserRouter>

@@ -35,9 +35,9 @@ const Booking = () => {
     fetchBookings();
   }, []);
 
-  useEffect(() => {
-    setPrice(form.duration * 100);
-  }, [form.duration]);
+useEffect(() => {
+  setPrice(30 + (form.duration > 1 ? (form.duration - 1) * 20 : 0));
+}, [form.duration]);
 
   useEffect(() => {
     if (showModal) {
@@ -196,7 +196,7 @@ const Booking = () => {
           </label>
 
           <p style={{ fontWeight: '700', fontSize: '1.3rem', color: '#2d9cdb', marginTop: '22px', textAlign: 'center' }}>
-            Total Price: ${price}
+             ${price}
           </p>
 
           <button type="submit" style={bookNowBtnStyle}>Book Now</button>
